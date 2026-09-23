@@ -1,0 +1,80 @@
+{
+  "project": "Trust Platform",
+  "epics": [
+    {
+      "id": "E0",
+      "name": "Foundation",
+      "priority": "P0"
+    },
+    {
+      "id": "E1",
+      "name": "Identity",
+      "priority": "P0"
+    },
+    {
+      "id": "E2",
+      "name": "Customer & Consent",
+      "priority": "P0"
+    },
+    {
+      "id": "E3",
+      "name": "Data Hub",
+      "priority": "P0"
+    },
+    {
+      "id": "E4",
+      "name": "Decisioning",
+      "priority": "P0"
+    },
+    {
+      "id": "E5",
+      "name": "Offers & Contracts",
+      "priority": "P0"
+    },
+    {
+      "id": "E6",
+      "name": "Money",
+      "priority": "P0"
+    },
+    {
+      "id": "E7",
+      "name": "Collections",
+      "priority": "P1"
+    },
+    {
+      "id": "E8",
+      "name": "Trust & Credit Reporting",
+      "priority": "P1"
+    },
+    {
+      "id": "E9",
+      "name": "Operations",
+      "priority": "P1"
+    },
+    {
+      "id": "E10",
+      "name": "Risk & Compliance",
+      "priority": "P0"
+    },
+    {
+      "id": "E11",
+      "name": "Security",
+      "priority": "P0"
+    },
+    {
+      "id": "E12",
+      "name": "Finance & Treasury",
+      "priority": "P0"
+    },
+    {
+      "id": "E13",
+      "name": "Analytics",
+      "priority": "P1"
+    },
+    {
+      "id": "E14",
+      "name": "Production Certification",
+      "priority": "P0"
+    }
+  ]
+}

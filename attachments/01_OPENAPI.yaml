@@ -1,0 +1,316 @@
+openapi: 3.1.0
+info:
+  title: Trust Platform API
+  version: 1.0.0
+  description: Production API contract for Trust digital lending platform.
+servers:
+  - url: https://api.example.invalid/api/v1
+    description: Placeholder; replace with production hostname.
+security:
+  - bearerAuth: []
+paths:
+  /auth/register:
+    post:
+      security: []
+      summary: Register customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: Customer registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+  /auth/login:
+    post:
+      security: []
+      summary: Authenticate customer
+      responses:
+        '200':
+          description: Authenticated
+  /auth/otp/verify:
+    post:
+      security: []
+      summary: Verify OTP
+      responses:
+        '200':
+          description: OTP verified
+  /me:
+    get:
+      summary: Get current customer profile
+      responses:
+        '200':
+          description: Customer profile
+  /consents:
+    get:
+      summary: List customer consents
+      responses:
+        '200':
+          description: Consent list
+    post:
+      summary: Grant consent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsentRequest'
+      responses:
+        '201':
+          description: Consent recorded
+  /financial-sources:
+    get:
+      summary: List connected financial sources
+      responses:
+        '200':
+          description: Sources
+  /financial-sources/{id}/sync:
+    post:
+      summary: Request source synchronization
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '202':
+          description: Sync accepted
+  /documents:
+    post:
+      summary: Upload document metadata/upload initiation
+      responses:
+        '201':
+          description: Document created
+  /loan-products:
+    get:
+      security: []
+      summary: List eligible public product descriptions
+      responses:
+        '200':
+          description: Products
+  /applications:
+    get:
+      summary: List customer applications
+      responses:
+        '200':
+          description: Applications
+    post:
+      summary: Create loan application
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationCreate'
+      responses:
+        '201':
+          description: Application created
+  /applications/{id}:
+    get:
+      summary: Get application
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Application
+  /applications/{id}/submit:
+    post:
+      summary: Submit application
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '202':
+          description: Submitted for decisioning
+  /applications/{id}/decision:
+    get:
+      summary: Get latest decision snapshot
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Decision
+  /offers/{id}:
+    get:
+      summary: Get offer
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Offer
+  /offers/{id}/accept:
+    post:
+      summary: Accept offer
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '202':
+          description: Acceptance recorded
+  /contracts/{id}/sign:
+    post:
+      summary: Sign contract
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      responses:
+        '202':
+          description: Contract signature recorded
+  /loans:
+    get:
+      summary: List customer loans
+      responses:
+        '200':
+          description: Loans
+  /loans/{id}:
+    get:
+      summary: Get loan
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Loan
+  /loans/{id}/schedule:
+    get:
+      summary: Get repayment schedule
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Schedule
+  /payments:
+    post:
+      summary: Initiate repayment
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentCreate'
+      responses:
+        '202':
+          description: Payment initiated
+  /payments/{id}:
+    get:
+      summary: Get payment status
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Payment
+  /support/cases:
+    post:
+      summary: Open support or complaint case
+      responses:
+        '201':
+          description: Case created
+  /trust:
+    get:
+      summary: Get customer Trust profile
+      responses:
+        '200':
+          description: Trust profile
+  /notifications:
+    get:
+      summary: List notifications
+      responses:
+        '200':
+          description: Notifications
+  /security/sessions:
+    get:
+      summary: List active sessions
+      responses:
+        '200':
+          description: Sessions
+  /security/sessions/{id}/revoke:
+    post:
+      summary: Revoke session
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: Revoked
+  /webhooks/{provider}:
+    post:
+      security: []
+      summary: Receive provider callback
+      parameters:
+        - name: provider
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        '202':
+          description: Accepted for asynchronous processing
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema: {type: string, format: uuid}
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema: {type: string, minLength: 16, maxLength: 128}
+  schemas:
+    RegisterRequest:
+      type: object
+      required: [phone]
+      properties:
+        phone: {type: string}
+        email: {type: string, format: email}
+    ConsentRequest:
+      type: object
+      required: [purpose, version]
+      properties:
+        purpose: {type: string}
+        version: {type: string}
+        scope: {type: object, additionalProperties: true}
+    ApplicationCreate:
+      type: object
+      required: [productId, requestedAmountMinor, currency, requestedTermDays]
+      properties:
+        productId: {type: string, format: uuid}
+        requestedAmountMinor: {type: integer, format: int64, minimum: 1}
+        currency: {type: string, minLength: 3, maxLength: 3}
+        requestedTermDays: {type: integer, minimum: 1}
+        purpose: {type: string}
+    PaymentCreate:
+      type: object
+      required: [loanId, amountMinor, currency, provider]
+      properties:
+        loanId: {type: string, format: uuid}
+        amountMinor: {type: integer, format: int64, minimum: 1}
+        currency: {type: string, minLength: 3, maxLength: 3}
+        provider: {type: string}
+    CustomerResponse:
+      type: object
+      properties:
+        customerId: {type: string, format: uuid}
+        status: {type: string}
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, requestId, retryable]
+          properties:
+            code: {type: string}
+            message: {type: string}
+            details: {type: array}
+            requestId: {type: string}
+            retryable: {type: boolean}

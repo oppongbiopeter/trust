@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8081/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Trust",
+      "hasCanvas": false,
+      "bodyTextLen": 424,
+      "bodyTextHash": "de8e3fb9348b5f3498282b1ba104d41b4ca07b84973ee55e03af6dcd72505641",
+      "bodyTextPrefix": "Trust Capacity for a licensed partner. They set the amount. Volu",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Trust",
+      "hasCanvas": false,
+      "bodyTextLen": 275,
+      "bodyTextHash": "566861d61499492bd5d69ee0ce3d50ddf598e1961916e5c8923b9ad91ef779d2",
+      "bodyTextPrefix": "Trust Who is signing in? I need a facility I work at a lending p",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-built.json",
+  "divergesFromBaseline": false,
+  "baselineReasons": []
+}

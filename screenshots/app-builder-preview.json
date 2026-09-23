@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Trust",
+      "hasCanvas": false,
+      "bodyTextLen": 450,
+      "bodyTextHash": "b175b92238440e2426ff5a7ead12ab4e0068b13334b78e9281083fb314b92b1d",
+      "bodyTextPrefix": "Trust A Ghana lending platform. Ask here. A licensed partner pro",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Trust",
+      "hasCanvas": false,
+      "bodyTextLen": 302,
+      "bodyTextHash": "932a498fadbe0fd7f383ed20a81daf079863904473d94c6b05b5bf71c500b152",
+      "bodyTextPrefix": "Trust A lending platform for Ghana. Informal first. I need a fac",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}
